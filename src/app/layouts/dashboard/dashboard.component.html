@@ -8,7 +8,12 @@
 
 <mat-drawer-container class="example-container" autosize>
   <!-- SIDEBAR -->
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer
+    [opened]="!isMobile()"
+    #drawer
+    class="example-sidenav"
+    [mode]="isMobile() ? 'over' : 'side'"
+  >
     <p>Auto-resizing sidenav</p>
     @if (showFiller) {
     <p>Lorem, ipsum dolor sit amet consectetur.</p>
@@ -33,11 +38,12 @@
       </button>
       <span>My Application</span>
     </mat-toolbar>
-    <!-- TOOLBAR SUPERIOR -->
 
-    <!-- <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button> -->
+    <main style="padding: 1rem">
+      <app-users />
+    </main>
+
+    <!-- TOOLBAR SUPERIOR -->
   </div>
   <!-- CONTENIDO A LA DERECHA DEL SIDEBAR -->
 </mat-drawer-container>
