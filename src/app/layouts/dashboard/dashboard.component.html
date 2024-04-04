@@ -1,0 +1,43 @@
+<!-- COLORES DE ANGULAR MATERIAL
+
+- primary: primaria
+- accent: secundaria
+- warn: errores
+
+-->
+
+<mat-drawer-container class="example-container" autosize>
+  <!-- SIDEBAR -->
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Auto-resizing sidenav</p>
+    @if (showFiller) {
+    <p>Lorem, ipsum dolor sit amet consectetur.</p>
+    }
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+  </mat-drawer>
+  <!-- SIDEBAR -->
+
+  <!-- CONTENIDO A LA DERECHA DEL SIDEBAR -->
+  <div class="example-sidenav-content">
+    <!-- TOOLBAR SUPERIOR -->
+    <mat-toolbar color="primary">
+      <button
+        (click)="drawer.toggle()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My Application</span>
+    </mat-toolbar>
+    <!-- TOOLBAR SUPERIOR -->
+
+    <!-- <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button> -->
+  </div>
+  <!-- CONTENIDO A LA DERECHA DEL SIDEBAR -->
+</mat-drawer-container>
