@@ -14,7 +14,9 @@ export class UsersComponent {
     'firstName',
     'lastName',
     'email',
+    'role',
     'createdAt',
+    'actions',
   ];
 
   users: IUser[] = [
@@ -23,6 +25,7 @@ export class UsersComponent {
       firstName: 'Naruto',
       lastName: 'Uzumaki',
       email: 'naru@test.com',
+      role: 'ADMIN',
       createdAt: new Date(),
     },
     {
@@ -30,24 +33,41 @@ export class UsersComponent {
       firstName: 'Sasuke',
       lastName: 'Uchiha',
       email: 'sasuke@test.com',
+      role: 'USER',
       createdAt: new Date(),
     },
   ];
 
   constructor(private matDialog: MatDialog) {}
 
-  openDialog(): void {
+  openDialog(editingUser?: IUser): void {
     this.matDialog
-      .open(UserDialogComponent)
+      .open(UserDialogComponent, {
+        data: editingUser,
+      })
       .afterClosed()
       .subscribe({
         next: (result) => {
           if (result) {
-            // LOGICA DE CREAR EL USUARIO
-            // this.users.push(result);
-            this.users = [...this.users, result];
+            if (editingUser) {
+              // ACTUALIZAR EL USUARIO EN EL ARRAY
+              this.users = this.users.map((u) =>
+                u.id === editingUser.id ? { ...u, ...result } : u
+              );
+            } else {
+              // LOGICA DE CREAR EL USUARIO
+              result.id = new Date().getTime().toString().substring(0, 3);
+              result.createAt = new Date();
+              this.users = [...this.users, result];
+            }
           }
         },
       });
+  }
+
+  onDeleteUser(id: number): void {
+    if (confirm('Esta seguro?')) {
+      this.users = this.users.filter((u) => u.id != id);
+    }
   }
 }
