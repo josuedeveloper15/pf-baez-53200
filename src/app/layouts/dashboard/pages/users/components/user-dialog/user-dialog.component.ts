@@ -19,7 +19,11 @@ export class UserDialogComponent {
     this.userForm = this.formBuilder.group({
       firstName: [
         '',
-        [Validators.required, Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$')],
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-ZÁÉÍÓÚáéíóúñÑ]+$'),
+          Validators.maxLength(5),
+        ],
       ],
       lastName: [
         '',
@@ -38,6 +42,14 @@ export class UserDialogComponent {
     if (editingUser) {
       this.userForm.patchValue(editingUser);
     }
+  }
+
+  get firstNameControl() {
+    return this.userForm.get('firstName');
+  }
+
+  get lastNameControl() {
+    return this.userForm.get('lastName');
   }
 
   onSave(): void {

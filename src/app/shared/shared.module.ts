@@ -8,9 +8,10 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [FormFieldValidationErrorsPipe],
   imports: [CommonModule],
   exports: [
     MatTableModule,
@@ -21,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     ReactiveFormsModule,
     MatIconModule,
+    FormFieldValidationErrorsPipe,
   ],
 })
 export class SharedModule {}
