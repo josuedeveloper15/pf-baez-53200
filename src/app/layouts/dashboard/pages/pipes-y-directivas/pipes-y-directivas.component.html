@@ -1,6 +1,12 @@
 <p>{{ nombre | myCustomTextTranform : "u" : "p" : true }}</p>
-<p>{{ "Lorem ipsum dolor sit amet" | myCustomTextTranform }}</p>
-<p>{{ "Lorem ipsum dolor sit amet" | myCustomTextTranform : "u" }}</p>
-<p>{{ "Lorem ipsum dolor sit amet" | myCustomTextTranform }}</p>
+<p appResaltado bgColor="red">
+  {{ "Lorem ipsum dolor sit amet" | myCustomTextTranform }}
+</p>
 
-<p>{{ hoy | date : "YYYY/MM/dd" }}</p>
+<p appResaltado bgColor="green">
+  {{ "Lorem ipsum dolor sit amet" | myCustomTextTranform : "u" }}
+</p>
+
+<p appResaltado>{{ "Lorem ipsum dolor sit amet" | myCustomTextTranform }}</p>
+
+<p *appRepetir>{{ hoy | date : "YYYY/MM/dd" }}</p>

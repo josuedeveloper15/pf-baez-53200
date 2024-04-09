@@ -9,9 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-errors.pipe';
+import { ResaltadoDirective } from './directives/resaltado.directive';
+import { RepetirDirective } from './directives/repetir.directive';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [FormFieldValidationErrorsPipe],
+  declarations: [
+    FormFieldValidationErrorsPipe,
+    ResaltadoDirective,
+    RepetirDirective,
+  ],
   imports: [CommonModule],
   exports: [
     MatTableModule,
@@ -19,10 +26,13 @@ import { FormFieldValidationErrorsPipe } from './pipes/form-field-validation-err
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatIconModule,
     FormFieldValidationErrorsPipe,
+    ResaltadoDirective,
+    RepetirDirective,
   ],
 })
 export class SharedModule {}

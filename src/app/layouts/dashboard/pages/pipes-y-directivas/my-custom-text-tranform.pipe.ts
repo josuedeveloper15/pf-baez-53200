@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MyCustomTextTranformPipe implements PipeTransform {
   transform(value: string, ...args: unknown[]): unknown {
-    console.log(args);
-
     if (args[0] === 'u') {
       return value.toUpperCase();
     } else {
