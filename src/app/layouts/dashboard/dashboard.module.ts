@@ -13,6 +13,7 @@ import { UsersModule } from './pages/users/users.module';
 import { PipesYDirectivasModule } from './pages/pipes-y-directivas/pipes-y-directivas.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsModule } from './pages/products/products.module';
+import { Clase09RxjsModule } from './pages/clase-09-rxjs/clase-09-rxjs.module';
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
@@ -26,6 +27,7 @@ import { ProductsModule } from './pages/products/products.module';
     SharedModule,
     PipesYDirectivasModule,
     ProductsModule,
+    Clase09RxjsModule,
   ],
   exports: [DashboardComponent],
 })
