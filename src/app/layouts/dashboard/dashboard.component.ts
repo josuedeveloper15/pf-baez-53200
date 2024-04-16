@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
   showFiller = false;
 
+  mostrarComponent = true;
+
   isMobile(): boolean {
     return window.innerWidth <= 280;
   }

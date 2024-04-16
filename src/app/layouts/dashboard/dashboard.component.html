@@ -38,11 +38,16 @@
     </mat-toolbar>
 
     <main style="padding: 1rem">
-      <h2>componente clase 09</h2>
+      <button (click)="mostrarComponent = !mostrarComponent">
+        alternar componente
+      </button>
+
+      <app-clase-10-rxjs-2 *ngIf="mostrarComponent" />
+      <!-- <h2>componente clase 09</h2>
       <app-clase-09-rxjs />
       <hr />
       <h2>componente productos</h2>
-      <app-products />
+      <app-products /> -->
       <!-- <app-users /> -->
       <!-- <app-pipes-y-directivas /> -->
     </main>

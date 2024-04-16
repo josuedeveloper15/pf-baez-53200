@@ -13,6 +13,7 @@ export class Clase09RxjsComponent {
     // this.runReloj();
 
     this.alertsService.notifier$.next('Mensaje');
+    this.alertsService.notifier$.complete();
   }
 
   runReloj() {
