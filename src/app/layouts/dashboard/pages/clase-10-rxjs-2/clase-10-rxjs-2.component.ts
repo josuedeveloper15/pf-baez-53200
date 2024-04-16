@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   BehaviorSubject,
+  delay,
   filter,
   first,
+  forkJoin,
   map,
   Observable,
+  of,
   skip,
   Subject,
   Subscription,
@@ -24,9 +27,41 @@ export class Clase10Rxjs2Component implements OnInit, OnDestroy {
 
   componenteDestruido$ = new Subject<boolean>();
   componenteDestruidoBehavior$ = new BehaviorSubject([]);
+
   usuarioAutenticado$ = new BehaviorSubject<IUser | null>(null);
 
   obtenerUsuarioSubscription?: Subscription;
+
+  usuarios: IUser[] = [];
+  roles: string[] = [];
+
+  cargando = false;
+
+  getRoles(): Observable<string[]> {
+    return of(['ADMIN', 'USER', 'STUDENT', 'TEACHER']).pipe(delay(1500));
+  }
+
+  getUsers(): Observable<IUser[]> {
+    const USERS_DB: IUser[] = [
+      {
+        id: 1,
+        firstName: 'Naruto',
+        lastName: 'Uzumaki',
+        email: 'naru@test.com',
+        role: 'ADMIN',
+        createdAt: new Date(),
+      },
+      {
+        id: 2,
+        firstName: 'Sasuke',
+        lastName: 'Uchiha',
+        email: 'sasuke@test.com',
+        role: 'USER',
+        createdAt: new Date(),
+      },
+    ];
+    return of(USERS_DB).pipe(delay(3000));
+  }
 
   login(): void {
     this.cambioElUsuario$.next(true);
@@ -40,6 +75,23 @@ export class Clase10Rxjs2Component implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cargando = true;
+    forkJoin([this.getUsers(), this.getRoles()]).subscribe({
+      next: (value) => {
+        this.usuarios = value[0];
+        this.roles = value[1];
+      },
+      complete: () => {
+        this.cargando = false;
+      },
+    });
+
+    // forkJoin([of('hola'), of(1), of(true)]).subscribe({
+    //   next: (value) => {
+    //     console.log(value);
+    //   },
+    // });
+
     const obtenerUsuario$ = new Observable<number>((observer) => {
       let counter = 0;
       setInterval(() => {
@@ -48,11 +100,11 @@ export class Clase10Rxjs2Component implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.obtenerUsuarioSubscription = obtenerUsuario$
-      // .pipe(takeUntil(this.componenteDestruido$))
-      .subscribe({
-        next: (v) => console.log(v),
-      });
+    // this.obtenerUsuarioSubscription = obtenerUsuario$
+    //   // .pipe(takeUntil(this.componenteDestruido$))
+    //   .subscribe({
+    //     next: (v) => console.log(v),
+    //   });
 
     this.cambioElUsuario$.subscribe({
       next: (value) => {

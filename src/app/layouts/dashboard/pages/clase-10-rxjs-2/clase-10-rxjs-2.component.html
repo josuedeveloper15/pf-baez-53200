@@ -1,5 +1,12 @@
-<p>clase-10-rxjs-2 works!</p>
+@if (cargando) {
+<div>Cargando... por favor espere...</div>
+} @else {
+<pre>{{ usuarios | json }}</pre>
+<pre>{{ roles | json }}</pre>
+}
+
+<!-- <p>clase-10-rxjs-2 works!</p>
 
 <button (click)="login()">Iniciar sesion</button>
 
-<pre>{{ usuarioAutenticado$ | async | json }}</pre>
+<pre>{{ usuarioAutenticado$ | async | json }}</pre> -->

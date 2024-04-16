@@ -26,18 +26,37 @@
   <div class="example-sidenav-content">
     <!-- TOOLBAR SUPERIOR -->
     <mat-toolbar color="primary">
-      <button
-        (click)="drawer.toggle()"
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with menu icon"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>My Application</span>
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <div>
+          <button
+            (click)="drawer.toggle()"
+            mat-icon-button
+            class="example-icon"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span>My Application</span>
+        </div>
+        <!-- ANGULAR 16-->
+        <div *ngIf="authUserSinPipe">{{ authUserSinPipe?.firstName }}</div>
+        <!-- ANGULAR 17-->
+        <!-- @if (authUser$ | async; as user) {
+        <div>{{ user?.firstName }}</div>
+        } -->
+      </div>
     </mat-toolbar>
 
     <main style="padding: 1rem">
+      <div>
+        <button (click)="login()" color="primary" mat-flat-button>
+          Iniciar sesion
+        </button>
+        <button (click)="logout()" color="warn" mat-flat-button>
+          Cerrar sesion
+        </button>
+      </div>
+
       <button (click)="mostrarComponent = !mostrarComponent">
         alternar componente
       </button>
