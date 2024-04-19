@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IUser } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { UsersService } from './users.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -19,26 +21,32 @@ export class UsersComponent {
     'actions',
   ];
 
-  users: IUser[] = [
-    {
-      id: 1,
-      firstName: 'Naruto',
-      lastName: 'Uzumaki',
-      email: 'naru@test.com',
-      role: 'ADMIN',
-      createdAt: new Date(),
-    },
-    {
-      id: 2,
-      firstName: 'Sasuke',
-      lastName: 'Uchiha',
-      email: 'sasuke@test.com',
-      role: 'USER',
-      createdAt: new Date(),
-    },
-  ];
+  loading = false;
 
-  constructor(private matDialog: MatDialog) {}
+  users: IUser[] = [];
+
+  constructor(
+    private matDialog: MatDialog,
+    private usersService: UsersService
+  ) {}
+
+  ngOnInit(): void {
+    this.loading = true;
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        console.log('next: ', users);
+        this.users = users;
+      },
+      error: (err) => {
+        console.log('error: ', err);
+        Swal.fire('Error', 'Ocurrio un error', 'error');
+      },
+      complete: () => {
+        console.log('complete');
+        this.loading = false;
+      },
+    });
+  }
 
   openDialog(editingUser?: IUser): void {
     this.matDialog
