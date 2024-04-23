@@ -3,6 +3,7 @@ import { ProductsService } from './products.service';
 import { IProduct } from './models';
 import { API_URL, PRODUCTS, RANDOM_NUMBER } from './products.module';
 import { AlertsService } from '../../../../core/services/alerts.service';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,8 @@ export class ProductsComponent implements OnInit {
     @Inject(API_URL) private apiUrl: string,
     @Inject(RANDOM_NUMBER) private randomNumber: number,
     @Inject(PRODUCTS) public products: IProduct[],
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private usersService: UsersService
   ) {
     console.log(this.apiUrl);
     console.log('random number: ', this.randomNumber);

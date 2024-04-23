@@ -1,0 +1,31 @@
+@if (isLoading) {
+<mat-spinner></mat-spinner>
+} @else {
+<form [formGroup]="saleForm" action="">
+  <mat-form-field>
+    <mat-label>Producto</mat-label>
+    <mat-select formControlName="product">
+      <mat-option [value]="product" *ngFor="let product of products"
+        >{{ product.name }} - {{ product.price | currency }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Cantidad</mat-label>
+    <input formControlName="quantity" matInput type="number" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comprador</mat-label>
+    <mat-select formControlName="buyer">
+      <mat-option [value]="user" *ngFor="let user of users"
+        >{{ user.firstName }} {{ user.lastName }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <button (click)="createSale()" mat-button>Crear</button>
+</form>
+
+<pre>{{ saleForm.value | json }}</pre>
+
+<pre>{{ sales | json }}</pre>
+}

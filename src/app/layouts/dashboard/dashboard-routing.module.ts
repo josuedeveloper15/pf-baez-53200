@@ -5,7 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   /**
-   * Path actual: /darshboard
+   * Path actual: /dashboard
    */
   {
     path: 'home',
@@ -21,6 +21,11 @@ const routes: Routes = [
     path: 'products',
     loadChildren: () =>
       import('./pages/products/products.module').then((m) => m.ProductsModule),
+  },
+  {
+    path: 'sales',
+    loadChildren: () =>
+      import('./pages/sales/sales.module').then((m) => m.SalesModule),
   },
   {
     path: '',
