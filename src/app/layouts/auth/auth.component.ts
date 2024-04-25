@@ -10,8 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent implements OnDestroy, OnInit {
-  authUserChangeSubscription?: Subscription;
-
   loginForm: FormGroup;
 
   constructor(
@@ -25,23 +23,9 @@ export class AuthComponent implements OnDestroy, OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.subscribeToAuthUserChange();
-  }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    this.authUserChangeSubscription?.unsubscribe();
-  }
-
-  subscribeToAuthUserChange(): void {
-    this.authUserChangeSubscription = this.authService.authUser$.subscribe({
-      next: (authUser) => {
-        if (authUser != null) {
-          this.router.navigate(['dashboard', 'home']);
-        }
-      },
-    });
-  }
+  ngOnDestroy(): void {}
 
   login() {
     console.log('HOLA');
