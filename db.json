@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "firstName": "Naruto",
+      "lastName": "Naruto",
+      "email": "naru@mail.com",
+      "role": "ADMIN",
+      "createdAt": "2024-04-30T01:14:53.907Z",
+      "id": "69fe"
+    },
+    {
+      "id": "8ed2"
+    },
+    {
+      "id": "3aff",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mail.com",
+      "role": "ADMIN",
+      "createAt": "2024-04-30T01:22:59.568Z"
+    },
+    {
+      "id": "d241",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mail.com",
+      "role": "USER",
+      "createAt": "2024-04-30T01:23:12.040Z"
+    },
+    {
+      "id": "c47b",
+      "firstName": "test",
+      "lastName": "test",
+      "email": "test@mail.com",
+      "role": "USER",
+      "createAt": "2024-04-30T01:23:28.747Z"
+    }
+  ],
+  "sales": [],
+  "roles": []
+}

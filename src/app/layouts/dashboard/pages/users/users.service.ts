@@ -1,36 +1,34 @@
 import { Injectable } from '@angular/core';
-import { IUser } from './models';
-import { catchError, delay, first, Observable, of, throwError } from 'rxjs';
-
-const USERS_DB: IUser[] = [
-  {
-    id: 1,
-    firstName: 'Naruto',
-    lastName: 'Uzumaki',
-    email: 'naru@test.com',
-    role: 'ADMIN',
-    createdAt: new Date(),
-  },
-  {
-    id: 2,
-    firstName: 'Sasuke',
-    lastName: 'Uchiha',
-    email: 'sasuke@test.com',
-    role: 'USER',
-    createdAt: new Date(),
-  },
-];
+import { CreateUserPayload, IUser } from './models';
+import {
+  catchError,
+  concatMap,
+  delay,
+  first,
+  forkJoin,
+  Observable,
+  of,
+  throwError,
+} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+  constructor(private httpClient: HttpClient) {}
+
   getUsers(): Observable<IUser[]> {
-    return of(USERS_DB).pipe(delay(1500));
-    // return throwError(() => new Error('Error al cargar los usuarios')).pipe(
-    //   catchError((err) => of(err))
-    // );
+    return this.httpClient.get<IUser[]>(environment.baseAPIURL + '/users');
   }
 
-  getUserById(id: number): Observable<IUser | undefined> {
-    return of(USERS_DB.find((el) => el.id === id)).pipe(delay(1500));
+  getUserById(id: string): Observable<IUser | undefined> {
+    return this.httpClient.get<IUser>(`${environment.baseAPIURL}/users/${id}`);
+  }
+
+  createUser(payload: CreateUserPayload): Observable<IUser> {
+    return this.httpClient.post<IUser>(
+      `${environment.baseAPIURL}/users`,
+      payload
+    );
   }
 }

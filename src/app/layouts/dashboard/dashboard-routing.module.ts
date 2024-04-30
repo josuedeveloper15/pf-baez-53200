@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './pages/home/home.component';
 import { adminGuard } from '../../core/guards/admin.guard';
+import { unsavedChangesGuard } from '../../core/guards/unsaved-changes.guard';
 
 const routes: Routes = [
   /**
@@ -26,6 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'sales',
+    canDeactivate: [unsavedChangesGuard],
     loadChildren: () =>
       import('./pages/sales/sales.module').then((m) => m.SalesModule),
   },

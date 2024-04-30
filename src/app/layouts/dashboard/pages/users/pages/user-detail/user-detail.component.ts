@@ -21,7 +21,7 @@ export class UserDetailComponent {
   ) {
     this.loading = true;
     this.user$ = this.usersSerivice
-      .getUserById(parseInt(this.activatedRoute.snapshot.params['id']))
+      .getUserById(this.activatedRoute.snapshot.params['id'])
       .pipe(
         finalize(() => {
           this.loading = false;
