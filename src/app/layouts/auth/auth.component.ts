@@ -28,7 +28,6 @@ export class AuthComponent implements OnDestroy, OnInit {
   ngOnDestroy(): void {}
 
   login() {
-    console.log('HOLA');
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
