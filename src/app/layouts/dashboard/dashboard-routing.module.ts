@@ -32,6 +32,11 @@ const routes: Routes = [
       import('./pages/sales/sales.module').then((m) => m.SalesModule),
   },
   {
+    path: 'counter',
+    loadChildren: () =>
+      import('./pages/counter/counter.module').then((m) => m.CounterModule),
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
