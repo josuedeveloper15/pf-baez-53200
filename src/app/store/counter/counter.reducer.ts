@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { sumar, restar } from './counter.actions';
 
-interface CounterState {
+export interface CounterState {
   value: number;
 }
 
