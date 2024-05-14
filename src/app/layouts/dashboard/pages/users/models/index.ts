@@ -5,7 +5,7 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  role: UserRole;
+  role: string;
   createdAt: Date;
 }
 
@@ -13,6 +13,6 @@ export interface CreateUserPayload {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
-  role: UserRole | null;
+  role: string | null;
   createdAt: Date | null;
 }
