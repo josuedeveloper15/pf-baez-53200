@@ -5,39 +5,43 @@ import { ISale } from '../models';
 export const saleFeatureKey = 'sale';
 
 export interface State {
+  loadingSales: boolean;
   sales: ISale[];
+  error: unknown;
 }
 
 export const initialState: State = {
+  loadingSales: false,
   sales: [],
+  error: null,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(SaleActions.loadSales, (state) => ({
-    ...state,
-    sales: [
-      {
-        id: 1,
-        buyer: {
-          id: 1,
-          createdAt: new Date(),
-          email: 'some@mail.com',
-          firstName: 'TEST',
-          lastName: 'TEST',
-          role: 'ADMIN',
-        },
-        product: {
-          id: 1,
-          name: 'IPAD',
-          price: 1000,
-        },
-        quantity: 2,
-      },
-    ],
-  })),
-  on(SaleActions.loadSalesSuccess, (state, action) => state),
-  on(SaleActions.loadSalesFailure, (state, action) => state)
+  // El disparador
+  on(SaleActions.loadSales, (state) => {
+    return {
+      ...state,
+      loadingSales: true,
+    };
+  }),
+
+  // El caso exitoso
+  on(SaleActions.loadSalesSuccess, (state, action) => {
+    return {
+      ...state,
+      sales: action.data,
+      loadingSales: false,
+    };
+  }),
+  // El caso error
+  on(SaleActions.loadSalesFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+      loadingSales: false,
+    };
+  })
 );
 
 export const saleFeature = createFeature({

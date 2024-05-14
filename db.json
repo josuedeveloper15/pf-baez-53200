@@ -36,6 +36,19 @@
       "createAt": "2024-04-30T01:23:28.747Z"
     }
   ],
-  "sales": [],
+  "products": [
+    {
+      "id": "abc1234",
+      "name": "PC Gamer",
+      "price": 10000
+    }
+  ],
+  "sales": [
+    {
+      "id": "abc123",
+      "productId": "abc1234",
+      "userId": "3aff"
+    }
+  ],
   "roles": []
 }

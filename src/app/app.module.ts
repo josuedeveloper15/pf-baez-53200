@@ -7,7 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DashboardModule } from './layouts/dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { rootReducer } from './store';
+import { metaReducers, rootReducer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 // import { DashboardComponent } from './layouts/dashboard/dashboard.component';
@@ -19,7 +19,9 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     DashboardModule,
     HttpClientModule,
-    StoreModule.forRoot(rootReducer, {}),
+    StoreModule.forRoot(rootReducer, {
+      metaReducers: metaReducers,
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
   ],

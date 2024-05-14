@@ -6,3 +6,10 @@ export const selectSaleState = createFeatureSelector<fromSale.State>(
 );
 
 export const selectSaleList = createSelector(selectSaleState, (s) => s.sales);
+
+export const selectLoadingSales = createSelector(
+  selectSaleState,
+  (s) => s.loadingSales
+);
+
+export const selectSalesError = createSelector(selectSaleState, (s) => s.error);

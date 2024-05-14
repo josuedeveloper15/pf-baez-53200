@@ -3,6 +3,9 @@
 <div [ngClass]="!loading ? 'd-block' : 'd-none'">
   <h1>Detalles del usuario: NOMBRE</h1>
   <pre>{{ user$ | async | json }}</pre>
+
+  <h2>Compras del usuario:</h2>
+  <pre>{{ compras$ | async | json }}</pre>
 </div>
 
 <!-- <button (click)="cambiarParametro()">cambiar param</button> -->

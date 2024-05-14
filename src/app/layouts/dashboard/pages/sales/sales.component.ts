@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SalesService } from './sales.service';
 import { ISale, ISaleForm } from './models';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -7,8 +7,13 @@ import { IProduct } from '../products/models';
 import { UsersService } from '../users/users.service';
 import { IUser } from '../users/models';
 import { Store } from '@ngrx/store';
-import { selectSaleList } from './store/sale.selectors';
+import {
+  selectLoadingSales,
+  selectSaleList,
+  selectSalesError,
+} from './store/sale.selectors';
 import { SaleActions } from './store/sale.actions';
+import { first, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sales',
@@ -16,26 +21,31 @@ import { SaleActions } from './store/sale.actions';
   styleUrl: './sales.component.scss',
 })
 export class SalesComponent implements OnInit {
-  sales: ISale[] = [];
   products: IProduct[] = [];
   users: IUser[] = [];
-
-  isLoading = false;
 
   existsUnsavedChanges = false;
 
   saleForm = new FormGroup<ISaleForm>({
     quantity: new FormControl(1),
-    buyer: new FormControl(null),
+    user: new FormControl(null),
     product: new FormControl(null),
   });
+
+  loadingSales$: Observable<boolean>;
+  error$: Observable<unknown>;
+  sales$: Observable<ISale[]>;
 
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
     private usersService: UsersService,
     private store: Store
-  ) {}
+  ) {
+    this.loadingSales$ = this.store.select(selectLoadingSales);
+    this.sales$ = this.store.select(selectSaleList);
+    this.error$ = this.store.select(selectSalesError);
+  }
 
   ngOnInit(): void {
     this.loadSales();
@@ -73,24 +83,6 @@ export class SalesComponent implements OnInit {
   }
 
   loadSales() {
-    // this.isLoading = true;
-
     this.store.dispatch(SaleActions.loadSales());
-
-    this.store.select(selectSaleList).subscribe({
-      next: (sales) => {
-        this.sales = sales;
-      },
-    });
-
-    // this.salesService.getSales().subscribe({
-    //   next: (sales) => {
-    //     this.sales = sales;
-    //   },
-    //   error: () => {},
-    //   complete: () => {
-    //     this.isLoading = false;
-    //   },
-    // });
   }
 }

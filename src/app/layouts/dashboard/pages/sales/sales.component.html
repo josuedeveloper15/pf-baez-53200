@@ -1,5 +1,7 @@
-@if (isLoading) {
+@if (loadingSales$ | async) {
 <mat-spinner></mat-spinner>
+} @else { @if (error$ | async) {
+<h2>Ocurrio un error al cargar las ventas</h2>
 } @else {
 <form [formGroup]="saleForm" action="">
   <mat-form-field>
@@ -27,5 +29,5 @@
 
 <pre>{{ saleForm.value | json }}</pre>
 
-<pre>{{ sales | json }}</pre>
-}
+<pre>{{ sales$ | async | json }}</pre>
+} }
