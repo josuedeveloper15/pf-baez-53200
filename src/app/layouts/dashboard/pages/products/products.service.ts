@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from './models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ProductsService {
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  getProducts(): IProduct[] {
-    return [
-      {
-        id: 1,
-        name: 'PC Gamer',
-        price: 3000,
-      },
-    ];
+  getProducts(): Observable<IProduct[]> {
+    return this.httpClient.get<IProduct[]>(
+      environment.baseAPIURL + '/products'
+    );
   }
 }
