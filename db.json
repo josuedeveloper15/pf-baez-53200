@@ -41,6 +41,26 @@
       "id": "abc1234",
       "name": "PC Gamer",
       "price": 10000
+    },
+    {
+      "id": "bd82",
+      "name": "Random product 1715821584700",
+      "price": 1715821584700
+    },
+    {
+      "id": "1ab9",
+      "name": "Random product 1715822607166",
+      "price": 1715822607166
+    },
+    {
+      "id": "e40e",
+      "name": "Random product 1715822607342",
+      "price": 1715822607342
+    },
+    {
+      "id": "0c07",
+      "name": "Random product 1715822607526",
+      "price": 1715822607526
     }
   ],
   "sales": [

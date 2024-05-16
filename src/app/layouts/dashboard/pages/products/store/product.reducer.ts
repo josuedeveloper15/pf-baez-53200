@@ -43,7 +43,44 @@ export const reducer = createReducer(
       error: action.error,
       isLoading: false,
     };
-  })
+  }),
+
+  on(ProductActions.createProduct, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+
+  on(ProductActions.createProductSuccess, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      products: [...state.products, action.data],
+    };
+  }),
+  on(ProductActions.createProductFailure, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      error: action.error,
+    };
+  }),
+
+  on(ProductActions.deleteProductById, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(ProductActions.deleteProductByIdSuccess, (state, action) => ({
+    ...state,
+    isLoading: false,
+    products: state.products.filter((el) => el.id !== action.data.id),
+  })),
+  on(ProductActions.deleteProductByIdFailure, (state, action) => ({
+    ...state,
+    isLoading: false,
+    error: action.error,
+  }))
 );
 
 export const productFeature = createFeature({

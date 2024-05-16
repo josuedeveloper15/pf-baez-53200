@@ -13,6 +13,7 @@ import {
   selectProductState,
 } from './store/product.selectors';
 import { map, Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-products',
@@ -35,5 +36,27 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(ProductActions.loadProducts());
+  }
+
+  deleteProductById(id: string): void {
+    Swal.fire({
+      icon: 'question',
+      html: `Esta seguro?`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(ProductActions.deleteProductById({ id }));
+      }
+    });
+  }
+
+  createProduct(): void {
+    this.store.dispatch(
+      ProductActions.createProduct({
+        payload: {
+          name: 'Random product ' + new Date().getTime(),
+          price: new Date().getTime(),
+        },
+      })
+    );
   }
 }
