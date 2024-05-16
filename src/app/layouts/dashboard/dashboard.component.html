@@ -44,7 +44,7 @@
           >
             <mat-icon>menu</mat-icon>
           </button>
-          <span>My Application</span>
+          <span>My Application - {{ (routeData$ | async)?.["title"] }}</span>
         </div>
         <!-- ANGULAR 16-->
         <div *ngIf="authUserSinPipe">{{ authUserSinPipe?.firstName }}</div>
